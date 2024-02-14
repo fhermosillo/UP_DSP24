@@ -7,8 +7,6 @@ La ecuación en diferencia general que representa un sistemas discreto LTI es:
 
 ![equation](https://latex.codecogs.com/svg.image?{\color{White}y(n)=\sum_{k=0}^{N}b_k&space;x(n-k)-\sum_{k=1}^{M}a_k&space;y(n-k)})
 
-$y(n) = \sum_{k=0}^{N} {b_k x(n - k)} - {\sum_{k=1}^{M} a_k y(n - k)}$
-
 Donde $a_k,b_k \in \mathbb{R}$ son llamados coeficientes asociados a la salida/entrada k-ésima, $M$ es el orden del sistema, así como el atraso máximo en la señal $y(n)$, mientras que $N$ es el atraso máximo en la señal de entrada $x(n)$.
 
 Si el sistema es FIR, los coeficientes $a_k = 0$, de otro modo $a_k \neq 0$.
