@@ -4,8 +4,9 @@ En este laboratorio se conocerán e implementarán los dos tipos de estructuras 
 
 Los sistemas discretos son representados mediante ecuaciones en diferencia, siendo una analogia a las ecuaciones en diferencia para modelar sistemas continuos.
 La ecuación en diferencia general que representa un sistemas discreto LTI es:
-
-![equation]($\sum_{k=1}^n a_k b_k$)
+\begin{equation}
+\sum_{k=1}^n a_k b_k
+\end{equation}
 
 
 $y(n) = \sum_{k=0}^{N} {b_k x(n - k)} - {\sum_{k=1}^{M} a_k y(n - k)}$
