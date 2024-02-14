@@ -33,7 +33,8 @@ $$
 
 En conclusión, se puede decir que si la respuesta al impulso es finita (sistemas FIR) la implementación del sistema será por la convolución, ya que solo se requiere multiplicar $M+1$ veces, mientras que si se tiene un sistema IIR (respuesta al impulso infinita) este método no es adecuado, debido a que se tendria que multiplcar una cantidad infinita de veces las secuencias, por lo que su implementación es mediante su ecuación en diferencias.
 
-## Tipo de Datos en C
+## Notas del lenguaje C
+### Tipo de Datos en C
 El lenguaje C no proporciona reglas exactas para los tipos de datos.
 
 Ejemplo: entero
@@ -44,6 +45,49 @@ Ejemplo: entero
 ** ```int32_t``` Entero sin signo de 32 bits
 ** ```float32_t``` Punto flotante de 32 bits (precisión simple)
 
+### Punteros y casting
+* Los punteros almacenan una dirección de la memoria RAM, en sistemas de 32-bits las variables de tipo puntero consumen 4 bytes de memoria ram
+** Operaciones con punteros ```int16_t *pdata = (int16_t *)(0x010344);```
+*** Suma: Incremento de la dirección de memoria relativo a la dirección de memoria actual respecto al sumando 2 multiplicado por el tamaño en bytes del tipo de dato empleado
+**** ```(pdata + 2)```: La nueva dirección de la suma es 0x010348 dado que se ha sumado al puntero pdata el valor de 2 y el tamaño en bytes de int16_t es dos, 0x010344 + 2*sizeof(int16_t) =0x010344 +  2*2 = 0x010344 +  4
+*** Resta: Decremento de la dirección de memoria relativo a la dirección de memoria actual respecto al sustrayendo 2 multiplicado por el tamaño en bytes del tipo de dato empleado
+**** **** ```(pdata - 2)```: La nueva dirección de la resta es 0x010340 dado que se ha restao al puntero pdata el valor de 2 y el tamaño en bytes de int16_t es dos, 0x010344 - 2*sizeof(int16_t) = 0x010344 -  2*2 = 0x010344 - 4
+*** Incremento: Incremento de 1 multiplicado por el tamaño en bytes del tipo de dato empleado, para la dirección de memoria relativo a la dirección de memoria actual
+*** Decremento: Decremento de 1 multiplicado por el tamaño en bytes del tipo de dato empleado, para la dirección de memoria relativo a la dirección de memoria actual
+* El casting en C/C++ se refiere a convertir un tipo de dato en otro
+
+```c++
+// Contiene 8 datos de 1 byte cada uno
+// el arreglo se puede ver como un puntero
+uint8_t buffer[8] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07};
+// Casting a dato de 4 bytes (uint32_t)
+// El puntero se puede ver tambien como un arreglo
+uint32_t *pData = (uint32_t *)buffer;
+// Dereferencia: Se lee el valor en memoria almacenado
+// en la dirección determinada por el puntero.
+Serial.printf("0x%08X\n", *pData); // Imprimirá 0x03020100 o los datos
+                                   // Del buffer se organizan ahora en
+                                   // Bloques de 32-bits
+Serial.printf("0x%08X\n", *(pData+1)); // Se le suma a la dirección de pData
+                                       // 1*4. Luego se imprime el valor del 
+                                       // siguiente bloque de memoria de 4 bytes
+                                       // (0x07060504)
+```
+
+### Arreglos y bucles FOR
+Ejemplo: Creación de una Look-up table para los valores de cos(w0*n)
+```c++
+#define OUTPUT_SCALE_FACTOR  (127)
+
+int8_t table[16];
+float32_t amplitude;
+flat32_t w0 = 0.0576;
+
+for (uint32_t n = 0; n < 16; n+=1)
+{
+    table[n] = OUTPUT_SCALE_FACTOR * sinf(n * w0);
+}
+```
 <!---
 COMMENTARY
 ```c++
