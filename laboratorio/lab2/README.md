@@ -5,6 +5,8 @@ En este laboratorio se conocerán e implementarán los dos tipos de estructuras 
 Los sistemas discretos son representados mediante ecuaciones en diferencia, siendo una analogia a las ecuaciones en diferencia para modelar sistemas continuos.
 La ecuación en diferencia general que representa un sistemas discreto LTI es:
 
+\sum_{k=1}^n a_k b_k
+$\sum_{k=1}^n a_k b_k$
 $y(n) = \sum_{k=0}^{N} {b_k x(n - k)} - {\sum_{k=1}^{M} a_k y(n - k)}$
 
 Donde $a_k,b_k \in \mathbb{R}$ son llamados coeficientes asociados a la salida/entrada k-ésima, $M$ es el orden del sistema, así como el atraso máximo en la señal $y(n)$, mientras que $N$ es el atraso máximo en la señal de entrada $x(n)$.
