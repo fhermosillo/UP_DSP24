@@ -13,8 +13,29 @@ Donde $a_k,b_k \in \mathbb{R}$ son llamados coeficientes asociados a la salida/e
 
 Si el sistema es FIR, los coeficientes $a_k = 0$, de otro modo $a_k \neq 0$.
 
+Dado un sistema LTI, su respuesta es calculada de dos formas:
+1. Ecuación en diferencias
+2. Convolución con la respuesta al impulso $h(n)$ del sistema, que es la que se obtiene de evaluar la ecuación en diferencias del sistema, cuando la entrada $x(n) = \delta(n)$, y la salida $y(n) = h(n)$
+
+La convolución entre dos secuencias o señales discretas $x(n)$ y $h(n)$ esta dada por:
+
+$$
+y(n) = x(n) * h(n) = \sum_{k=-\inf}^{\inf} x(k) h(n - k)
+$$
+
+Donde para fines prácticos, conviene usar esta técnica si la respuesta al impulso $h(n)$ es finita, es decir que tiene una longitud de $M$ muestras (por ejemplo, $h(n) = \{ 1, 0.2, 0.1\}$ es una secuencia de longitud 3), ya que la convolución se reduce a:
+
+$$
+y(n) = x(n) * h(n) = \sum_{k=0}^{M} x(n - k) h(k)
+$$
+
+En conclusión, se puede decir que si la respuesta al impulso es finita (sistemas FIR) la implementación del sistema será por la convolución, ya que solo se requiere multiplicar $M+1$ veces, mientras que si se tiene un sistema IIR (respuesta al impulso infinita) este método no es adecuado, debido a que se tendria que multiplcar una cantidad infinita de veces las secuencias, por lo que su implementación es mediante su ecuación en diferencias.
+
+<!---
+COMMENTARY
 ```c++
 #include "AudioKit.hpp"
 ```
+--->
 
 Para la práctica, se sugiere hacer uso de la plantilla del laboratorio #1.
