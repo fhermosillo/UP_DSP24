@@ -1,5 +1,5 @@
 # Sistemas FIR e IIR
-En este laboratorio se conocerán e implementarán los dos tipos de estructuras de sistemas discretos LTI (Lineales e Invariantes en tiempo) básicos:
+En este laboratorio se conocerán e implementarán los dos tipos de estructuras básicas de sistemas discretos LTI:
 - Filtros FIR (Respuesta al Impulso Finita), en los cuales la salida $y(n)$ depende únicamente de la entrada $x(n)$ y sus valores pasados $x(n - k)$
 - Filtros IIR (Respuesta al Impulso Infinita), en los cuales la salida $y(n)$ depende tanto de la entrada $x(n)$ y sus valores pasados $x(n - k)$, así como de valores pasados de la salida $y(n - k)$.
 
