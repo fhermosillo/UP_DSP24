@@ -95,4 +95,5 @@ COMMENTARY
 ```
 --->
 
-Para la práctica, se sugiere hacer uso de la plantilla del laboratorio #1.
+# Indicaciones del Laboratorio #2
+* Para la práctica, se sugiere hacer uso de la plantilla del laboratorio #1.
