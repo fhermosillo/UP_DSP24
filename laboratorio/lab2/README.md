@@ -13,4 +13,8 @@ Donde $a_k,b_k \in \mathbb{R}$ son llamados coeficientes asociados a la salida/e
 
 Si el sistema es FIR, los coeficientes $a_k = 0$, de otro modo $a_k \neq 0$.
 
+```c++
+#include "AudioKit.hpp"
+```
+
 Para la práctica, se sugiere hacer uso de la plantilla del laboratorio #1.
