@@ -75,6 +75,7 @@ void setup(void)
 
 /* FreeRTOS Main Task ----------------------------------------------------------*/
 // This function runs in a while of the main task of the RTOS
+// whose priority is 1 (Maximum priority is 24)
 void loop(void) {
   vTaskDelay(1000);
 }
