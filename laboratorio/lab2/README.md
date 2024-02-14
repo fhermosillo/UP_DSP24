@@ -17,7 +17,7 @@ $$
 Si el sistema es FIR, los coeficientes $a_k = 0$, de otro modo $a_k \neq 0$.
 
 ## Sistemas Convolutivos
-Dado un sistema LTI, su respuesta es calculada de dos formas:
+La respuesta $y(n)$ que resulta de aplicar un sistema LTI sobre una señal de entrada $x(n)$ es calculada de dos formas:
 1. Ecuación en diferencias
 2. Convolución con la respuesta al impulso $h(n)$ del sistema, que es la que se obtiene de evaluar la ecuación en diferencias del sistema, cuando la entrada $x(n) = \delta(n)$, y la salida $y(n) = h(n)$
 
