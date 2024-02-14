@@ -75,7 +75,7 @@ Serial.printf("0x%08X\n", *(pData+1)); // Se le suma a la dirección de pData
 ```
 
 ### Arreglos y bucles FOR
-Ejemplo: Creación de una Look-up table para los valores de cos(w0*n)
+Ejemplo: Creación de una Look-up table para los valores de $cos(\omega_0 n)$
 ```c++
 #define OUTPUT_SCALE_FACTOR  (127)
 
