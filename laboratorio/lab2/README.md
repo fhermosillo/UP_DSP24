@@ -40,9 +40,9 @@ Ejemplo: entero
 * Debe tener al menos 16 bits, pero puede ser mayor.
 * Debe incluir el rango [−32,767, +32,767]. A menudo, también se incluye -32,768.
 * Es muy importante definir el tipo de dato correcto en dependencia de la configuración empleada
-** ```c++ int16_t ``` Entero con signo de 16 bits
-** ```c++ int32_t ``` Entero sin signo de 32 bits
-** ```c++ float32_t ``` Punto flotante de 32 bits (precisión simple)
+** ```int16_t``` Entero con signo de 16 bits
+** ```int32_t``` Entero sin signo de 32 bits
+** ```float32_t``` Punto flotante de 32 bits (precisión simple)
 
 <!---
 COMMENTARY
