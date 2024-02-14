@@ -1,3 +1,4 @@
+# Sistemas FIR e IIR
 En este laboratorio se conocerán e implementarán los dos tipos de estructuras de sistemas discretos LTI (Lineales e Invariantes en tiempo) básicos:
 - Filtros FIR (Respuesta al Impulso Finita), en los cuales la salida $y(n)$ depende únicamente de la entrada $x(n)$ y sus valores pasados $x(n - k)$
 - Filtros IIR (Respuesta al Impulso Infinita), en los cuales la salida $y(n)$ depende tanto de la entrada $x(n)$ y sus valores pasados $x(n - k)$, así como de valores pasados de la salida $y(n - k)$.
@@ -13,6 +14,7 @@ Donde $a_k,b_k \in \mathbb{R}$ son llamados coeficientes asociados a la salida/e
 
 Si el sistema es FIR, los coeficientes $a_k = 0$, de otro modo $a_k \neq 0$.
 
+## Sistemas Convolutivos
 Dado un sistema LTI, su respuesta es calculada de dos formas:
 1. Ecuación en diferencias
 2. Convolución con la respuesta al impulso $h(n)$ del sistema, que es la que se obtiene de evaluar la ecuación en diferencias del sistema, cuando la entrada $x(n) = \delta(n)$, y la salida $y(n) = h(n)$
