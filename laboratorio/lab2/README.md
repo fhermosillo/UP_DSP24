@@ -62,9 +62,11 @@ Ejemplo: entero
 // Contiene 8 datos de 1 byte cada uno
 // el arreglo se puede ver como un puntero
 uint8_t buffer[8] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07};
+
 // Casting a dato de 4 bytes (uint32_t)
 // El puntero se puede ver tambien como un arreglo
 uint32_t *pData = (uint32_t *)buffer;
+
 // Dereferencia: Se lee el valor en memoria almacenado
 // en la dirección determinada por el puntero.
 Serial.printf("0x%08X\n", *pData); // Imprimirá 0x03020100 o los datos
