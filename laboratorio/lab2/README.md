@@ -41,19 +41,19 @@ Ejemplo: entero
 * Debe tener al menos 16 bits, pero puede ser mayor.
 * Debe incluir el rango [−32,767, +32,767]. A menudo, también se incluye -32,768.
 * Es muy importante definir el tipo de dato correcto en dependencia de la configuración empleada
-** ```int16_t``` Entero con signo de 16 bits
-** ```int32_t``` Entero sin signo de 32 bits
-** ```float32_t``` Punto flotante de 32 bits (precisión simple)
+  * ```int16_t``` Entero con signo de 16 bits
+  * ```int32_t``` Entero sin signo de 32 bits
+  * ```float32_t``` Punto flotante de 32 bits (precisión simple)
 
 ### Punteros y casting
 * Los punteros almacenan una dirección de la memoria RAM, en sistemas de 32-bits las variables de tipo puntero consumen 4 bytes de memoria ram
-** Operaciones con punteros ```int16_t *pdata = (int16_t *)(0x010344);```
-*** Suma: Incremento de la dirección de memoria relativo a la dirección de memoria actual respecto al sumando 2 multiplicado por el tamaño en bytes del tipo de dato empleado
-**** ```(pdata + 2)```: La nueva dirección de la suma es 0x010348 dado que se ha sumado al puntero pdata el valor de 2 y el tamaño en bytes de int16_t es dos, 0x010344 + 2*sizeof(int16_t) =0x010344 +  2*2 = 0x010344 +  4
-*** Resta: Decremento de la dirección de memoria relativo a la dirección de memoria actual respecto al sustrayendo 2 multiplicado por el tamaño en bytes del tipo de dato empleado
-**** **** ```(pdata - 2)```: La nueva dirección de la resta es 0x010340 dado que se ha restao al puntero pdata el valor de 2 y el tamaño en bytes de int16_t es dos, 0x010344 - 2*sizeof(int16_t) = 0x010344 -  2*2 = 0x010344 - 4
-*** Incremento: Incremento de 1 multiplicado por el tamaño en bytes del tipo de dato empleado, para la dirección de memoria relativo a la dirección de memoria actual
-*** Decremento: Decremento de 1 multiplicado por el tamaño en bytes del tipo de dato empleado, para la dirección de memoria relativo a la dirección de memoria actual
+  * Operaciones con punteros ```int16_t *pdata = (int16_t *)(0x010344);```
+    * Suma: Incremento de la dirección de memoria relativo a la dirección de memoria actual respecto al sumando 2 multiplicado por el tamaño en bytes del tipo de dato empleado
+      * ```(pdata + 2)```: La nueva dirección de la suma es 0x010348 dado que se ha sumado al puntero pdata el valor de 2 y el tamaño en bytes de int16_t es dos, 0x010344 + 2*sizeof(int16_t) =0x010344 +  2*2 = 0x010344 +  4
+    * Resta: Decremento de la dirección de memoria relativo a la dirección de memoria actual respecto al sustrayendo 2 multiplicado por el tamaño en bytes del tipo de dato empleado
+      *  ```(pdata - 2)```: La nueva dirección de la resta es 0x010340 dado que se ha restao al puntero pdata el valor de 2 y el tamaño en bytes de int16_t es dos, 0x010344 - 2*sizeof(int16_t) = 0x010344 -  2*2 = 0x010344 - 4
+    *   Incremento: Incremento de 1 multiplicado por el tamaño en bytes del tipo de dato empleado, para la dirección de memoria relativo a la dirección de memoria actual
+    *   Decremento: Decremento de 1 multiplicado por el tamaño en bytes del tipo de dato empleado, para la dirección de memoria relativo a la dirección de memoria actual
 * El casting en C/C++ se refiere a convertir un tipo de dato en otro
 
 ```c++
