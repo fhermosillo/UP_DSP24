@@ -79,9 +79,9 @@ void loop() {
   for(int n = 0; n < bytesRead/2; n+=2) {
     // int16 to float
     float sampleL = TOFLOAT(AudioBuffer[n]);
-	float sampleR = TOFLOAT(AudioBuffer[n+1]);
+    float sampleR = TOFLOAT(AudioBuffer[n+1]);
 	
-	// Process sample by sample
+	// Process sample
 	// BEGIN
 	
 	// END
@@ -92,7 +92,7 @@ void loop() {
 	
     // float to int16
     AudioBuffer[n] = TOINT16(sampleL);
-	AudioBuffer[n] = TOINT16(sampleR);
+    AudioBuffer[n+1] = TOINT16(sampleR);
   }
   
   /* Signal Interpolation */
