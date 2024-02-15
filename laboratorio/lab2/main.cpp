@@ -30,6 +30,8 @@
 AudioKit kit;							//!< Codec driver
 int16_t AudioBuffer[DMA_BUFFER_SIZE];	//!< Buffer that stores the data to process
 
+const uint32_t Mfir = 8;
+const float fir_b_coefs[] = {-0.00000000000000000155,	-0.02266398545955264007,	0.00000000000000001047,	0.27397708256552399941,	0.49737380578805728826,	0.27397708256552399941,	0.00000000000000001047,	-0.02266398545955264007,	-0.00000000000000000155};
 
 /* Private functions --------------------------*/
 void audiokit_gpio_init(void);
@@ -84,11 +86,11 @@ void loop() {
 	
   	// Process sample by sample
 	  // BEGIN
-    float y_n = x_n_left * fir_b_coeffs[0]; // x(n)h(0)
+    float y_n = x_n_left * fir_b_coefs[0]; // x(n)h(0)
     // sum k=1 to N x(n-k) h(k)
     for(int k = 0; k < Mfir; k++)
     {
-      y_n += xbuf[k] * fir_b_coeffs[k+1];
+      y_n += xbuf[k] * fir_b_coefs[k+1];
     }
 
     // Update xbuffer
