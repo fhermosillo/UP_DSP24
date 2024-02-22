@@ -58,9 +58,7 @@ void setup() {
   cfg.sample_rate = AUDIO_HAL_08K_SAMPLES;		// Sampling frequency (Fs)
   cfg.bits_per_sample = AUDIO_HAL_BIT_LENGTH_16BITS;	// Number of bits per sample
   cfg.buffer_size=DMA_BUFFER_SIZE;	// DMA buffer size (Each entry stores a variable of bits_per_sample)
-  //cfg.sample_rate;  // Sample rate {8000, 11025, 16000, 22050, 24000, 32000, 44100, 48000} Hz (Def 44100)
-  //cfg.buffer_size;  // DMA Buffer size in samples (Def 512)(Limited to 4092 bytes)
-  //cfg.buffer_count; // Number of buffers used for DMA (Def 6)(Total memory footprint is buffer_count*buffer_size*bits_per_sample/8)
+  cfg.buffer_count = 2; // Number of buffers used for DMA (Def 6)(Total memory footprint is buffer_count*buffer_size*bits_per_sample/8)
   kit.begin(cfg);		// Initialize ES8388 audio codec
   kit.setVolume(100);	// Set audio codec volume to 100
 
