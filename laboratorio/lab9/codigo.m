@@ -50,12 +50,6 @@ Tg=rgb2gray(T);
 % donde -(P-1) <= p <= (M-1), y -(Q-1) <= q <= (N-1)
 
 
-% Correlacion cruzada mediante la funcion de Matlab
-Yt=normxcorr2(Tg,Ig);
-Yt=Yt(size(Tg,1):size(Yt,1)-size(Tg,1), size(Tg,2):size(Yt,2)-size(Tg,2));
-R = zeros([size(Ig,1),size(Ig,2)]); 
-R(1:size(Yt,1),1:size(Yt,2))=Yt;
-
 % Grafica de la matriz de correlación
 figure;
 subplot(1,2,1);
@@ -71,3 +65,31 @@ R=maxpooling(R,5);
 
 
 % Grafica de los bounding boxes
+Res=I;
+for p = 1:length(x)
+    % Left
+    i1=max(1,y(p)-2);
+    i2=min(size(I,2),y(p)+2);
+    Res(x(p):x(p)+size(Tg,1),i1:i2,1) = 255;
+    Res(x(p):x(p)+size(Tg,1),i1:i2,2) = 0;
+    Res(x(p):x(p)+size(Tg,1),i1:i2,3) = 0;
+    % Rigth
+    i1=max(y(p)+size(Tg,2)-2,1);
+    i2=min(y(p)+size(Tg,2)+2,size(I,2));
+    Res(x(p):x(p)+size(Tg,1),i1:i2,1) = 255;
+    Res(x(p):x(p)+size(Tg,1),i1:i2,2) = 0;
+    Res(x(p):x(p)+size(Tg,1),i1:i2,3) = 0;
+    % Top
+    i1=max(1,x(p)-2);
+    i2=min(size(I,1),x(p)+2);
+    Res(i1:i2,y(p):y(p)+size(Tg,2),1) = 255;
+    Res(i1:i2,y(p):y(p)+size(Tg,2),2) = 0;
+    Res(i1:i2,y(p):y(p)+size(Tg,2),3) = 0;
+    % Bottom
+    i1=max(x(p)+size(Tg,1)-2,1);
+    i2=min(x(p)+size(Tg,1)+2,size(I,1));
+    Res(i1:i2,y(p):y(p)+size(Tg,2),1) = 255;
+    Res(i1:i2,y(p):y(p)+size(Tg,2),2) = 0;
+    Res(i1:i2,y(p):y(p)+size(Tg,2),3) = 0;
+end
+figure,imagesc(Res); 
