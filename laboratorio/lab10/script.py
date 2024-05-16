@@ -9,13 +9,11 @@ import numpy as np
 import cv2
 from kalman import KalmanFilter
 from BallDetector import BallDetector
-import matplotlib.pyplot as plt
 
 
-
-# Get centroid
+# Get centroid: FIXED CENTROID COMPUTATION
 def get_centroid(bbox):
-    return ((bbox[0]+bbox[2]-1)/2, (bbox[1]+bbox[3]-1)/2)
+    return np.array([[bbox[0]+bbox[2]/2], [bbox[1]+bbox[3]/2]])
 
 
 
@@ -38,47 +36,62 @@ def ball_tracking():
     # Color in BGR
     COLOR_RED = (0, 0, 255)
     COLOR_GREEN = (0, 255, 0)
+    COLOR_BLUE = (255, 0, 0)
     
     # Kalman filter
-    current_measurement = None
-    current_prediction = np.array([[905], [311]])
-    A = np.array()  # Dynamic Model (constant velocity)
-    H = np.array()  # Measurement matrix (x,y)
-    Q = np.array()  # Process noise covariance
-    R = np.array()  # Measurement noise covariance
-    x0=np.zeros((4,1))
-    kalman = KalmanFilter(A=A,B=None,H=H,Q=Q,R=R,P=None,x0=None)
-    kalman.update(np.array(current_prediction, dtype=np.float32))
+    z0 = np.array([[909], [283]], dtype=np.float32)
+    zhat = z0
+    dt = 0.025
+    A = np.array([[1,0,dt,0], [0,1,0,dt], [0,0,1,0], [0,0,0,1]], dtype=np.float32)  # Dynamic Model (constant velocity)
+    H = np.array([[1,0,0,0],[0,1,0,0]], dtype=np.float32)  # Measurement matrix (x,y)
+    Q = np.eye(4)*0.0005
+    R = np.eye(2)*0.001
+    kalman = KalmanFilter(A=A,B=None,H=H,Q=Q,R=R)
+    kalman.correct(z0)
     
-    # Ball Detector (Template Matching)
-    T = cv2.imread('ball.png')
-    detector = BallDetector(T)
+    # Ball Detector
+    detector = BallDetector()
     
+    cv2.namedWindow("Tracking") 
     while vid.isOpened():                             # read all video frames
         ret, frame = vid.read()
         if not ret:
             break
         
+        # Perform ball detection
         bbox = detector.apply(frame)
         
-        lpx, lpy = int(current_prediction[0]), int(current_prediction[1])
-        frame = cv2.circle(frame, (lpx, lpy), 0, COLOR_RED, 20) # plot prediction dot
+        # Kalman prediction
         x = kalman.predict()
         
-        if bbox is not None: # detection -> draw bounding box, update kalman filter
+        if len(bbox): # If ball was detected, update kalman filter
+            # Plot detected bounding box: BOUNDING BOX FOR DETECTION
             frame = cv2.rectangle(frame, (bbox[0], bbox[1]), (bbox[0]+bbox[2], bbox[1]+bbox[3]), COLOR_GREEN, 2)
+            
             # update kalman
-            current_measurement = np.array(get_centroid(bbox), dtype=np.float32).reshape(2, 1)
-            kalman.correct(current_measurement)
+            z = get_centroid(bbox)
+            x = kalman.correct(z)
+            zhat = np.dot(kalman.H,x)
+            
+            # Plot estimated centroid: CENTROID FOR ESTIMATION
+            frame = cv2.circle(frame, (int(zhat[0]), int(zhat[1])), 0, COLOR_BLUE, 10) # plot prediction dot
+            
+        else:
+            # Plot predicted centroid: CENTROID FOR PREDICTION
+            zhat = np.dot(kalman.H,x)
+            frame = cv2.circle(frame, (int(zhat[0]), int(zhat[1])), 0, COLOR_RED, 10)
         
-        
-        current_prediction = (int(x[0]), int(x[1]))
-        cv2.imshow("tracking", frame)
-        cv2.waitKey(int(fps))
-        #plt.imshow(frame, interpolation='nearest')
-        #plt.show()
+        cv2.imshow("Tracking", frame)
+        k = cv2.waitKey() & 0xFF
+        if k == 27:
+           break
+       
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         out.write(frame)
     
     vid.release() # release video object
     out.release()
+    cv2.destroyAllWindows()
+    
+if __name__ == '__main__':
+    ball_tracking()
